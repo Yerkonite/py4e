@@ -12,13 +12,20 @@ ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
 url = input('Enter - ')
-posit = int(input("Position: "))-1
-counts = int(input("Counts: "))
-for i in range(counts):
-    html = urlopen(url, context=ctx).read()
-    soup = BeautifulSoup(html,'html.parser')
-    tags = soup('a')
-    link = tags[posit].get('href',None)
-    url = link
-    #e = z[posit].contents[0]
-    print("Retrieving: ", url)
+html = urlopen(url, context=ctx).read()
+soup = BeautifulSoup(html, "html.parser")
+
+# Retrieve all of the anchor tags
+tags = soup('span')
+y = []
+for tag in tags:
+    # Look at the parts of a tag
+    x = tag.contents[0]
+    x = x.split()
+    #print(type(x))
+    if len(x) > 0:
+        y = y + x
+jiyn = 0
+for z in y:
+    jiyn = jiyn + int(z)
+print(jiyn)
